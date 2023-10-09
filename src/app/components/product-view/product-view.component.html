@@ -1,0 +1,45 @@
+<!-- Product Display Part -->
+<div class="container-fluid" style="background-color: black">
+  <div class="row">
+    <div class="col-md-3 mt-3" *ngFor="let product of products.products">
+      <div class="card mt-2">
+        <div class="card-body">
+          <div class="card-img-actions text-center">
+            <img
+              [src]="product.images[0]"
+              alt="img"
+              class="card-img img-fluid mb-1"
+            />
+          </div>
+        </div>
+        <div class="card-body bg-light text-center">
+          <div class="fw-semibold">
+            <a class="text-default">{{ product.title }}</a>
+            <h3 class="mb-0 fw-semibold">{{ product.price | currency }}</h3>
+            <div class="btns">
+              <button
+                class="btn btn-sm btn-dark mt-2 me-1"
+                routerLink="/product-details/{{ product.id }}"
+              >
+                <i class="fa fa-solid fa-info me-2"></i>&nbsp;View Details</button
+              >&nbsp;
+              <button
+                class="btn btn-sm btn-warning mt-2"
+                (click)="addToCart(product)"
+              >
+                <i class="fa fa-cart-plus me-2"></i>&nbsp;Add To Cart
+              </button>
+              &nbsp;
+              <button
+                class="btn btn-sm btn-danger mt-2"
+                (click)="remove(product)"
+              >
+                <i class="fa fa-remove me-2"></i>&nbsp;Remove
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
