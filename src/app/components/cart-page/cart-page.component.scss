@@ -1,0 +1,13 @@
+td {
+  vertical-align: middle;
+}
+.cart {
+  position: absolute;
+  left: 50%;
+  top: 60%;
+  transform: translate(-50%, -50%);
+  padding: 15px;
+}
+.cart .center img {
+  width: 250px;
+}

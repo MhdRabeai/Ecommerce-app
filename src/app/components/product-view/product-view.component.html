@@ -1,44 +1,42 @@
 <!-- Product Display Part -->
-<div class="container-fluid" style="background-color: black">
-  <div class="row">
-    <div class="col-md-3 mt-3" *ngFor="let product of products.products">
-      <div class="card mt-2">
-        <div class="card-body">
-          <div class="card-img-actions text-center">
-            <img
-              [src]="product.images[0]"
-              alt="img"
-              class="card-img img-fluid mb-1"
-            />
-          </div>
-        </div>
-        <div class="card-body bg-light text-center">
-          <div class="fw-semibold">
-            <a class="text-default">{{ product.title }}</a>
-            <h3 class="mb-0 fw-semibold">{{ product.price | currency }}</h3>
-            <div class="btns">
-              <button
-                class="btn btn-sm btn-dark mt-2 me-1"
-                routerLink="/product-details/{{ product.id }}"
-              >
-                <i class="fa fa-solid fa-info me-2"></i>&nbsp;View Details</button
-              >&nbsp;
-              <button
-                class="btn btn-sm btn-warning mt-2"
-                (click)="addToCart(product)"
-              >
-                <i class="fa fa-cart-plus me-2"></i>&nbsp;Add To Cart
-              </button>
-              &nbsp;
-              <button
-                class="btn btn-sm btn-danger mt-2"
-                (click)="remove(product)"
-              >
-                <i class="fa fa-remove me-2"></i>&nbsp;Remove
-              </button>
-            </div>
-          </div>
-        </div>
+<div class="container-fluid bg-dark">
+  <div class="row justify-content-center">
+    <div
+      *ngFor="let product of products.products"
+      class="card mh-100 p-0 pb-2 m-2 mt-4"
+      style="width: 18rem"
+    >
+      <img [src]="product.images[0]" class="card-img-top" alt="img" />
+      <div
+        class="card-body text-center border-bottom border-top border-secondary mb-2 mt-1"
+      >
+        <p class="card-title fs-5 fw-bold text-success">
+          {{ product.title }}
+        </p>
+        <h4 class="card-text fw-bold">${{ product.price }}</h4>
+      </div>
+      <div class="btn-group btn-group-sm w-50 m-auto">
+        <button
+          type="button"
+          class="btn btn-secondary btn-sm"
+          routerLink="/product-details/{{ product.id }}"
+        >
+          <i class="fa fa-solid fa-info"></i>
+        </button>
+        <button
+          type="button"
+          class="btn btn-secondary"
+          (click)="addToCart(product)"
+        >
+          <i class="fa fa-cart-plus"></i>
+        </button>
+        <button
+          type="button"
+          class="btn btn-secondary"
+          (click)="remove(product)"
+        >
+          <i class="fa fa-remove"></i>
+        </button>
       </div>
     </div>
   </div>

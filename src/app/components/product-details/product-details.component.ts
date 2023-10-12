@@ -18,10 +18,9 @@ export class ProductDetailsComponent {
   ) {}
   ngOnInit(): void {
     let productId = this.activatedRoute.snapshot.params['id'];
-    console.log(productId);
+
     this.api.getProductById(productId).subscribe((res) => {
       this.productDate = res;
-      console.log(this.productDate);
     });
   }
   addToCart(product: Product) {

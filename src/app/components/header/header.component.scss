@@ -1,0 +1,19 @@
+.headerr {
+  border-bottom: 1px solid #ddd;
+}
+.dorpdown {
+  position: relative;
+}
+.dorpdown:hover > .dropdown-menu {
+  display: block;
+}
+.dropdown-menu img {
+  width: 70px;
+  margin-left: 5px;
+}
+.dropdown-menu {
+  position: absolute;
+  margin-top: 10px;
+  left: 50%;
+  transform: translateX(-75%);
+}

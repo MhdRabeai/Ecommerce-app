@@ -1,0 +1,16 @@
+<div class="card text-center">
+  <div class="image">
+    <img
+      src="https://cdn.pixabay.com/photo/2017/01/13/01/22/ok-1976099_1280.png"
+      alt="Done"
+    />
+  </div>
+  <h1 class="text-danger">{{ userData | titlecase }}</h1>
+  <h2>Order Has Placed Successfully</h2>
+  <strong>Thank You For Shopping With Popular E-commerce</strong>
+  <h5 class="mt-3 text-success">
+    Kindly Pay Amount
+    <strong class="text-primary">${{ grandAmount | number : "1.0-0" }}</strong>
+    during dilivery
+  </h5>
+</div>

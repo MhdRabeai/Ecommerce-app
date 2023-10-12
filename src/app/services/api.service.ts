@@ -8,6 +8,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class ApiService {
   public cartItemList: any = [];
+  public amount: number = 0;
   public productsList = new BehaviorSubject<any>([]);
   constructor(private http: HttpClient) {}
   getProducts() {
@@ -17,6 +18,11 @@ export class ApiService {
     return this.http.get<Product[]>('https://dummyjson.com/products/' + id);
   }
   addToCart(data: Product) {
+    this.cartItemList.map((ele: Product, index: Product) => {
+      if (data.id === ele.id) {
+        this.cartItemList.splice(index, 1);
+      }
+    });
     this.cartItemList.push(data);
     this.productsList.next(this.cartItemList);
   }
@@ -30,5 +36,26 @@ export class ApiService {
       }
     });
     this.productsList.next(this.cartItemList);
+  }
+  // Total Calc
+  calcPrice() {
+    let total = 0;
+    this.cartItemList.map((ele: any) => {
+      total += ele.price;
+    });
+    return total;
+  }
+  // remove all items
+  removeAllItems() {
+    this.cartItemList = [];
+    this.productsList.next(this.cartItemList);
+  }
+  // Passing Data From one Component to another
+  sendFinalAmount(data: number) {
+    this.amount = data;
+  }
+
+  reciveFinalAmount() {
+    return this.amount;
   }
 }

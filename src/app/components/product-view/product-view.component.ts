@@ -12,11 +12,11 @@ export class ProductViewComponent {
   constructor(private api: ApiService) {}
   ngOnInit(): void {
     this.displayProducts();
+    localStorage.removeItem('ecomDate');
   }
   displayProducts() {
     this.api.getProducts().subscribe((res) => {
       this.products = res;
-      console.log(this.products);
     });
   }
   addToCart(date: any) {
