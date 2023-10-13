@@ -7,45 +7,56 @@
   </div>
 </nav> -->
 
-<div class="container">
+<div class="container mt-5">
   <div class="row product-detail">
-    <div class="col-sm-3">
-      <img class="product-img" src="{{ productDate?.images[0] }}" alt="img" />
-      <div class="btns">
-        <button class="btn btn-primary">Buy Now</button>&nbsp;
-        <button
-          *ngIf="showAdd"
-          (click)="addToCart(productDate)"
-          class="btn btn-success"
-        >
-          Add To Cart
-        </button>
-        <button
-          *ngIf="showRemove"
-          (click)="remove(productDate)"
-          class="btn btn-info text-light"
-        >
-          Remove
-        </button>
-      </div>
-    </div>
-
-    <div class="col-sm-8">
-      <div>
-        <h1>{{ productDate?.title }}</h1>
-        <p class="text-success">Special Price</p>
-        <h3>Price : {{ productDate?.price | currency }}</h3>
-        <strong>Category: &nbsp;{{ productDate?.category }}</strong
-        ><br />
-        <strong>Description :</strong><br />
-        <p>{{ productDate?.description }}</p>
-        <p class="text-success">
-          Discount: {{ productDate?.discountPercentage }}%
-        </p>
-        <strong>Stocks: {{ productDate?.stock }} Units left</strong><br />
-        <button class="btn btn-warning text-light mt-2" routerLink="/">
-          Back
-        </button>
+    <div class="card mb-3 w-100">
+      <div class="row g-0">
+        <div class="col-md-4 d-flex justify-content-center align-items-center">
+          <img
+            class="img-fluid rounded-start"
+            src="{{ productDate?.images[0] }}"
+            alt="img"
+          />
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <div class="card-title border-bottom border-dark text-center">
+              <h2>{{ productDate?.title }}</h2>
+              <p class="text-success fw-bold">Special Price</p>
+            </div>
+            <div class="card-text pb-3">
+              <h4>Price : ${{ productDate?.price }}</h4>
+              <p class="fw-bold">
+                Category: {{ productDate?.category | titlecase }}
+              </p>
+              <strong>Description :</strong>
+              <p>{{ productDate?.description }}</p>
+              <div class="text-success fw-bold">
+                Discount: {{ productDate?.discountPercentage }}%
+              </div>
+              <strong>Stocks: {{ productDate?.stock }} Units left</strong>
+            </div>
+          </div>
+          <div class="card-footer pt-2 text-center">
+            <button
+              *ngIf="showAdd"
+              (click)="addToCart(productDate)"
+              class="btn btn-success"
+            >
+              Add To Cart
+            </button>
+            <button
+              *ngIf="showRemove"
+              (click)="remove(productDate)"
+              class="btn btn-warning text-light"
+            >
+              Remove</button
+            >&nbsp;
+            <button class="btn btn-danger text-light" routerLink="/">
+              Back
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </div>

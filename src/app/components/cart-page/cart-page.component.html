@@ -1,53 +1,60 @@
+<!--  -->
 <ng-container *ngIf="showProduct.length">
-  <div class="container-fluid mt-3 text-center">
+  <div class="container mt-3 text-center">
     <div class="row">
-      <div class="col-sm-9">
-        <h1>Cart Items</h1>
-        <table class="mt-3 table table-dark table-striped">
-          <thead>
-            <tr>
-              <th scope="col">Image</th>
-              <th scope="col">Brand</th>
-              <th scope="col">Category</th>
-              <th scope="col">Price</th>
-              <th scope="col">Action</th>
-            </tr>
-          </thead>
+      <h1>Cart Items</h1>
+      <table class="mt-3 table table-dark table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Image</th>
+            <th scope="col">Brand</th>
+            <th scope="col">Category</th>
+            <th scope="col">Price</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of showProduct">
+            <td>
+              <img
+                [src]="item.images[0]"
+                alt="image"
+                style="width: 100px; height: 100px; border-radius: 15px"
+              />
+            </td>
+            <td>{{ item.brand }}</td>
+            <td>{{ item.category }}</td>
+            <td>{{ item.price | currency }}</td>
+            <td>
+              <button class="btn btn-sm btn-danger" (click)="remove(item)">
+                <i class="fa fa-remove"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="row mt-4">
+      <!-- Total Section -->
+      <h1 class="border-top border-dark pt-2">Total Amount</h1>
+
+      <div class="body p-4 mt-4" style="border: 1px solid #dee2e6">
+        <table class="table">
           <tbody>
-            <tr *ngFor="let item of showProduct">
-              <td>
-                <img
-                  [src]="item.images[0]"
-                  alt="image"
-                  style="width: 100px; height: 100px; border-radius: 15px"
-                />
-              </td>
-              <td>{{ item.brand }}</td>
-              <td>{{ item.category }}</td>
-              <td>{{ item.price | currency }}</td>
-              <td>
-                <button class="btn btn-sm btn-danger" (click)="remove(item)">
-                  <i class="fa fa-remove"></i>
-                </button>
-              </td>
+            <tr>
+              <td>Purchases :</td>
+              <td>${{ totalAmount | number : "1.0-0" }}</td>
+            </tr>
+            <tr>
+              <td>Tax :</td>
+              <td>${{ taxAmount | number : "1.0-0" }}(Tax)</td>
+            </tr>
+            <tr>
+              <td>Final Amount :</td>
+              <td>${{ allAmount | number : "1.0-0" }}</td>
             </tr>
           </tbody>
         </table>
-      </div>
-      <!-- Total Section -->
-      <div class="col-sm-3">
-        <h1>Total Amount</h1>
-        <br />
-        <strong class="text-success fs-4"
-          >${{ totalAmount | number : "1.0-0" }}</strong
-        ><br />
-        <strong class="text-success fs-4">+</strong><br />
-        <strong class="text-success fs-4"
-          >${{ taxAmount | number : "1.0-0" }}(Tax)</strong
-        ><br />
-        <strong class="text-success fs-3"
-          >Total = ${{ allAmount | number : "1.0-0" }}</strong
-        ><br />
         <div class="btn-group mt-3">
           <button
             class="btn btn-primary"
@@ -59,77 +66,80 @@
             Empty Cart
           </button>
         </div>
-        <!-- Form -->
-        <div class="Form mt-3" *ngIf="form">
-          <form [formGroup]="myForm">
-            <div class="mb-3">
-              <label for="exampleInputname1" class="form-label">Name</label>
-              <input
-                formControlName="name"
-                type="text"
-                class="form-control"
-                id="exampleInputname1"
-                aria-describedby="nameHelp"
-              />
-            </div>
-            <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label"
-                >Email address</label
-              >
-              <input
-                formControlName="email"
-                type="email"
-                class="form-control"
-                id="exampleInputEmail1"
-                aria-describedby="emailHelp"
-              />
-            </div>
-            <div class="mb-3">
-              <label for="exampleInputNumber1" class="form-label"
-                >Phone :</label
-              >
-              <input
-                formControlName="password"
-                type="phone"
-                class="form-control"
-                id="exampleInputPassword1"
-              />
-            </div>
-            <div class="mb-3">
-              <label for="exampleFormControlTextarea1" class="form-label"
-                >Address</label
-              >
-              <textarea
-                formControlName="address"
-                class="form-control"
-                id="exampleFormControlTextarea1"
-                rows="3"
-                style="resize: none"
-              ></textarea>
-            </div>
-            <div class="btn-group">
-              <button
-                type="submit"
-                class="btn btn-success"
-                [disabled]="myForm.invalid"
-                (click)="onSubmit()"
-                routerLink="/order-page"
-              >
-                Order</button
-              >&nbsp;
-              <button
-                type="submit"
-                class="btn btn-secondary"
-                (click)="form = false"
-              >
-                Cancel
-              </button>
-            </div>
-          </form>
-        </div>
-        <!-- End Form -->
       </div>
+
+      <!-- Form -->
+      <div
+        class="Form mt-3 mb-3 text-center d-flex justify-content-center"
+        *ngIf="form"
+      >
+        <form [formGroup]="myForm" class="w-50 border-top border-dark pt-4">
+          <div class="mb-3">
+            <label for="exampleInputname1" class="form-label">Name :</label>
+            <input
+              formControlName="name"
+              type="text"
+              class="form-control"
+              id="exampleInputname1"
+              aria-describedby="nameHelp"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Email :</label>
+            <input
+              formControlName="email"
+              type="email"
+              class="form-control"
+              id="exampleInputEmail1"
+              aria-describedby="emailHelp"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputNumber1" class="form-label">Phone :</label>
+            <input
+              formControlName="password"
+              type="phone"
+              class="form-control"
+              id="exampleInputPassword1"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label"
+              >Address :</label
+            >
+            <textarea
+              formControlName="address"
+              class="form-control"
+              id="exampleFormControlTextarea1"
+              rows="3"
+              style="resize: none"
+            ></textarea>
+          </div>
+          <div class="btn-group">
+            <button
+              type="submit"
+              class="btn btn-success"
+              [disabled]="myForm.invalid"
+              (click)="onSubmit()"
+              routerLink="/order-page"
+            >
+              Order</button
+            >&nbsp;
+            <button
+              type="submit"
+              class="btn btn-secondary"
+              (click)="form = false"
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+      <!-- End Form -->
     </div>
+    <button type="button" class="btn btn-danger mt-4 mb-4" routerLink="/">
+      Go Back
+    </button>
   </div>
 </ng-container>
 
